@@ -34,7 +34,7 @@ class Post(models.Model):
         
         self.is_delete = True
         
-        self.save
+        self.save()
     
     
     def __str__(self):

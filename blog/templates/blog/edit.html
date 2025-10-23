@@ -155,20 +155,23 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg px-3 sticky-top">
-    <a class="navbar-brand" href="index.html">Super Blog</a>
+    <a class="navbar-brand" href="/">Super Blog</a>
   </nav>
 
   <main class="container">
     <h1>Blogni Tahrirlash</h1>
-    <form id="editPostForm" enctype="multipart/form-data" action="{% url '' %}">
+    <form id="editPostForm" enctype="multipart/form-data" action="{% url 'edit' post.slug %}" method="post">
+
+        {% csrf_token %}
+
       <label for="title">Sarlavha</label>
       <input type="text" id="title" name="title" placeholder="{{ post.title }}" required />
 
       <label for="imageUrl">Rasm Yuklash (yangi rasm tanlang, agar o‘zgartirmoqchi bo‘lsangiz)</label>
-      <input type="file" id="imageUrl" name="imageUrl" accept="image/*" placeholder="{{ post.main_image.url }}"/>
+      <input type="file" id="imageUrl" name="main_image" accept="image/*" placeholder="{{ post.main_image.url }}"/>
 
       <label for="content">Kontent</label>
-      <textarea id="content" name="content" placeholder="{{ post.desc | slice:':10' }}" required></textarea>
+      <textarea id="content" name="content" placeholder="{{ post.desc | slice:':10' }}"></textarea>
 
       <button type="submit" class="btn btn-primary">Saqlash</button>
     </form>

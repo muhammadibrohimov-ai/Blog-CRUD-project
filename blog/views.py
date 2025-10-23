@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.core.paginator import Paginator
 
 from .models import Post, Images
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -42,54 +43,28 @@ class EditPostView(View):
     def get(self, request, slug):
         return render(request, 'blog/edit.html', context={'post' : Post.objects.get(slug = slug)})
     
+
     def post(self, request, slug):
-        
-        post = Post.objects.get(slug=slug)
-        
+        post = get_object_or_404(Post, slug=slug)
+
         title = request.POST.get('title')
         desc = request.POST.get('desc')
-        main_image = request.FILES['main_image']
-        
-        if title and desc and main_image:
-            post.update(
-                title=title,
-                desc=desc,
-                main_image=main_image,
-            )
-            
-        elif title and desc:
-            post.update(
-                title=title,
-                desc=desc,
-            )
-        elif title and main_image:
-            post.update(
-                title=title,
-                main_image=main_image,
-            )
-        elif desc and main_image:
-            post.update(
-                desc=desc,
-                main_image=main_image,
-            )    
-            
-        elif title:
-            post.update(
-                title=title,
-            )
-            
-        elif desc:
-            post.update(
-                desc=desc
-            )
-        elif main_image:
-            post.update(
-                main_image = main_image
-            )
-            
+        main_image = request.FILES.get('main_image')
+
+        # Update fields if they are present in the request
+        if title:
+            post.title = title
+        if desc:
+            post.desc = desc
+        if main_image:
+            post.main_image = main_image
+
         post.save()
-        
-        
-        
         return redirect('/')
-        
+    
+    
+class DeletePostView(View):
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        post.delete()
+        return redirect('/')

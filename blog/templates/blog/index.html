@@ -209,7 +209,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg px-3 sticky-top">
-    <a class="navbar-brand" href="#">Super Blog</a>
+    <a class="navbar-brand" href="/">Super Blog</a>
     <div class="ms-auto d-flex align-items-center">
       <a href="{% url 'add' %}" class="btn btn-success me-3">+ Yangi blog</a>
     </div>
@@ -234,8 +234,8 @@
           </div>
           <div class="card-buttons">
             <a href="{% url 'detail' post.slug %}" class="btn btn-primary btn-sm">Ko‘rish</a>
-            <a href="edit.html" class="btn btn-outline-secondary btn-sm">Tahrirlash</a>
-            <button type="button" class="btn btn-outline-danger btn-sm">O'chirish</button>
+            <a href="{% url 'edit' post.slug %}" class="btn btn-outline-secondary btn-sm">Tahrirlash</a>
+            <button type="button" class="btn btn-outline-danger btn-sm"><a href="{% url 'del' post.slug %}">O'chirish</a></button>
           </div>
         </div>
       </div>
