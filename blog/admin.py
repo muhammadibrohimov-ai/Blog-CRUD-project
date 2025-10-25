@@ -1,6 +1,7 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 from import_export.admin import ImportExportModelAdmin
+from django.core.paginator import Paginator
 
 from .models import Post, Images
 
