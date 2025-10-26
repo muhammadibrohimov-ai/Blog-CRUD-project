@@ -159,20 +159,12 @@
 
   <main class="container">
     <h1>Yangi Blog Qo‘shish</h1>
-    <form id="addPostForm" action="{% url 'add' %}" method="post" enctype="multipart/form-data">
+    <form id="addPostForm" method="post" enctype="multipart/form-data">
 
         {% csrf_token %}
 
-      <label for="title">Sarlavha</label>
-      <input type="text" id="title" name="title" placeholder="Blog sarlavhasini kiriting" required />
-
-      <label for="mainImage">Asosiy rasm</label>
-      <input type="file" id="main_image" name="main_image" accept="image/*" required />
-
-      <label for="content">Tavsifi</label>
-      <textarea id="content" name="desc" placeholder="Blog matnini kiriting..." required></textarea>
-
-      <button type="submit" class="btn btn-primary">Yaratish</button>
+        {{ form.as_p }}
+         <button type="submit" class="btn btn-primary">Blog Qo‘shish</button>
     </form>
 
     <div class="back-btn">

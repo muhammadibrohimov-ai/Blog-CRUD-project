@@ -160,20 +160,14 @@
 
   <main class="container">
     <h1>Blogni Tahrirlash</h1>
-    <form id="editPostForm" enctype="multipart/form-data" action="{% url 'edit' post.slug %}" method="post">
+    <form id="editPostForm" enctype="multipart/form-data" method="post">
 
         {% csrf_token %}
 
-      <label for="title">Sarlavha</label>
-      <input type="text" id="title" name="title" placeholder="{{ post.title }}" required />
+        {{ form.as_p }}
 
-      <label for="imageUrl">Rasm Yuklash (yangi rasm tanlang, agar o‘zgartirmoqchi bo‘lsangiz)</label>
-      <input type="file" id="imageUrl" name="main_image" accept="image/*" placeholder="{{ post.main_image.url }}"/>
+        <button type="submit" class="btn btn-primary">Tasdiqlash</button>
 
-      <label for="content">Kontent</label>
-      <textarea id="content" name="content" placeholder="{{ post.desc | slice:':10' }}"></textarea>
-
-      <button type="submit" class="btn btn-primary">Saqlash</button>
     </form>
     <div class="back-btn">
       <a href="{% url 'main' %}" class="btn btn-primary">← Orqaga qaytish</a>

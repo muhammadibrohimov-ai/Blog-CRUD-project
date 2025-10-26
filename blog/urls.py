@@ -3,9 +3,9 @@ from .views import MainPageView, DetailPageView, AddPostView, EditPostView, Dele
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main'),
-    path('/detail/<str:slug>/', DetailPageView.as_view(), name='detail'),
+    path('detail/<str:slug>/', DetailPageView.as_view(), name='detail'),
     path('add-post/', AddPostView.as_view(), name='add'),
     path('edit/<str:slug>/', EditPostView.as_view(), name='edit'),
-    path('delete/<str:slug>', DeletePostView.as_view(), name='del'),
+    path('delete/<slug:slug>/', DeletePostView.as_view(), name='del'),
 ]
 

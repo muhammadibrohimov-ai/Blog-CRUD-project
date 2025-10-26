@@ -245,19 +245,47 @@
     </div>
   </div>
 
-    <nav aria-label="Blog pagination">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Oldingi</a>
+   {% if is_paginated %}
+<nav aria-label="Blog pagination">
+  <ul class="pagination">
+    <!-- Previous Page -->
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Oldingi</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Oldingi</span>
+      </li>
+    {% endif %}
+
+    <!-- Page Numbers -->
+    {% for num in paginator.page_range %}
+      {% if num == page_obj.number %}
+        <li class="page-item active">
+          <span class="page-link">{{ num }}</span>
         </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
         <li class="page-item">
-          <a class="page-link" href="#">Keyingi</a>
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
         </li>
-      </ul>
-    </nav>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Next Page -->
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Keyingi</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">Keyingi</span>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
 
   <footer>
     <p>© 2025 Super Blog. Barcha huquqlar himoyalangan. | Privacy Policy</p>
